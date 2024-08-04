@@ -1,3 +1,4 @@
+// app.js
 import express from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
@@ -12,12 +13,12 @@ import hospedajeRoutes from './routes/hospedaje.routes.js';
 
 import { isAuth, isAdmin, isVeterinarian, isAdminOrVeterinarian } from './middlewares/auth.middleware.js';
 
-const app = express(); // Declaración de `app`
+const app = express();
 
 const allowedOrigins = [
   'http://localhost:5173',
   'https://new-betel-app.vercel.app',
-  'https://newbetelapp-production.up.railway.app/'
+  'https://newbetelapp-production.up.railway.app'
 ];
 
 app.use(cors({
@@ -51,7 +52,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-export default app; // Exportación de `app`
+export default app;
+
 
 
 
