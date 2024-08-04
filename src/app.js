@@ -16,7 +16,7 @@ const app = express(); // Declaración de `app`
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://betel-app-v1.vercel.app',
+  'https://new-betel-app.vercel.app',
   'https://newbetelapp-production.up.railway.app/'
 ];
 
