@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "build": "vite build"
+    "build": "cd BETFRONTEND && npm run build"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
