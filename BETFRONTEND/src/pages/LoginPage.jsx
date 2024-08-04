@@ -17,7 +17,7 @@ function LoginPage() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const response = await axios.post(`${API_URL}/api/signin`, { email: data.email, password: data.password }, { withCredentials: true });
+      const response = await axios.post(`${API_URL}/api/auth/signin`, { email: data.email, password: data.password }, { withCredentials: true });
       const user = response.data;
       console.log('Login successful', user);
       navigate("/profile");
