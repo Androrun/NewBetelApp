@@ -1,9 +1,13 @@
-// middlewares/validate.middleware.js
-export const validateSchema = (schema) => (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) {
-    return res.status(400).json({ message: error.details[0].message });
-  }
-  next();
-};
+import { z } from "zod";
 
+export const validateSchema = (schema) => (req, res, next) => {
+  try {
+    schema.parse(req.body);
+    next();
+  } catch (e) {
+    if (e instanceof z.ZodError) {
+      return res.status(400).json(e.errors);
+    }
+    next(e);
+  }
+};
