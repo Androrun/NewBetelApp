@@ -1,5 +1,11 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Configuraciones para ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -7,12 +13,19 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 // Configurar rutas de la API
-app.use('/api/admin', require('./src/routes/admin.routes.js'));
-app.use('/api/auth', require('./src/routes/auth.routes.js'));
-app.use('/api/client', require('./src/routes/client.routes.js'));
-app.use('/api/hospedaje', require('./src/routes/hospedaje.routes.js'));
-app.use('/api/hospitalization', require('./src/routes/hospitalization.routes.js'));
-app.use('/api/patient', require('./src/routes/patient.routes.js'));
+import adminRoutes from './src/routes/admin.routes.js';
+import authRoutes from './src/routes/auth.routes.js';
+import clientRoutes from './src/routes/client.routes.js';
+import hospedajeRoutes from './src/routes/hospedaje.routes.js';
+import hospitalizationRoutes from './src/routes/hospitalization.routes.js';
+import patientRoutes from './src/routes/patient.routes.js';
+
+app.use('/api/admin', adminRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/client', clientRoutes);
+app.use('/api/hospedaje', hospedajeRoutes);
+app.use('/api/hospitalization', hospitalizationRoutes);
+app.use('/api/patient', patientRoutes);
 
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(__dirname, 'dist')));
