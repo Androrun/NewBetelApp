@@ -1,25 +1,32 @@
-import express from "express";
-import morgan from "morgan";
-import cookieParser from "cookie-parser";
+import express from 'express';
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import dotenv from 'dotenv'; // Importar dotenv
 
-dotenv.config(); // Cargar las variables de entorno
+import authRoutes from './routes/auth.routes.js';
+import clientRoutes from './routes/client.routes.js'; 
+import patientRoutes from './routes/patient.routes.js';
+import adminRoutes from './routes/admin.routes.js';
+import hospitalizationRoutes from './routes/hospitalization.routes.js';
+import hospedajeRoutes from './routes/hospedaje.routes.js'; 
 
-import authRoutes from "./routes/auth.routes.js";
-import clientRoutes from "./routes/client.routes.js"; 
-import patientRoutes from "./routes/patient.routes.js";
-import adminRoutes from "./routes/admin.routes.js";
-import hospitalizationRoutes from "./routes/hospitalization.routes.js";
-import hospedajeRoutes from "./routes/hospedaje.routes.js"; 
+import { isAuth, isAdmin, isVeterinarian, isAdminOrVeterinarian } from './middlewares/auth.middleware.js';
 
-import { isAuth, isAdmin, isVeterinarian, isAdminOrVeterinarian } from "./middlewares/auth.middleware.js";
-import { pool } from "./db.js";
+const app = express(); // Declaración de `app`
 
-const app = express();
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://betel-app-v1.vercel.app'
+];
 
 app.use(cors({
-  origin: '*', // Permitir todos los orígenes temporalmente
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
@@ -43,18 +50,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-import 'dotenv/config'; // Asegúrate de que dotenv esté instalado y configurado
-import app from './app.js';
+export default app; // Exportación de `app`
 
-const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0';
-
-app.listen(PORT, HOST, () => {
-  console.log(`Server running on http://${HOST}:${PORT}`);
-});
-
-
-export default app;
 
 
 
