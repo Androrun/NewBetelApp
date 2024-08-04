@@ -21,7 +21,7 @@ import hospitalizationRoutes from './src/routes/hospitalization.routes.js';
 import patientRoutes from './src/routes/patient.routes.js';
 
 app.use('/api/admin', adminRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);  // Esta ruta es crítica para el signin
 app.use('/api/client', clientRoutes);
 app.use('/api/hospedaje', hospedajeRoutes);
 app.use('/api/hospitalization', hospitalizationRoutes);
