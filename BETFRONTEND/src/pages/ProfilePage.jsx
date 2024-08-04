@@ -13,7 +13,7 @@ function ProfilePage() {
 
   useEffect(() => {
     if (user) {
-      setRoleName(roles[user.role_id]);
+      setRoleName(roles[user.role_id] || "No definido");
     }
   }, [user]);
 
@@ -23,7 +23,7 @@ function ProfilePage() {
       <div className="flex">
         <div className="w-1/3 p-5">
           <img
-            src="https://avatars.githubusercontent.com/u/61786976?v=4"
+            src={user?.gravatar || "https://avatars.githubusercontent.com/u/61786976?v=4"}
             alt="avatar"
             className="w-48 h-48 rounded-full mx-auto"
           />
@@ -32,11 +32,11 @@ function ProfilePage() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-gray-200 font-bold mb-2">Nombre</label>
-              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{user?.name}</div>
+              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{user?.name || "N/A"}</div>
             </div>
             <div>
               <label className="block text-gray-200 font-bold mb-2">Email</label>
-              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{user?.email}</div>
+              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{user?.email || "N/A"}</div>
             </div>
             <div>
               <label className="block text-gray-200 font-bold mb-2">Rol</label>
@@ -44,7 +44,9 @@ function ProfilePage() {
             </div>
             <div>
               <label className="block text-gray-200 font-bold mb-2">Fecha de Creación</label>
-              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{new Date(user?.created_at).toLocaleDateString()}</div>
+              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">
+                {user?.created_at ? new Date(user.created_at).toLocaleDateString() : "N/A"}
+              </div>
             </div>
           </div>
         </div>
