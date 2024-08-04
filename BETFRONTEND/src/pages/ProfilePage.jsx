@@ -17,6 +17,10 @@ function ProfilePage() {
     }
   }, [user]);
 
+  if (!user) {
+    return <div>Cargando...</div>;
+  }
+
   return (
     <div className="container mx-auto p-5">
       <h1 className="text-3xl font-bold mb-5 text-gray-200">Perfil del Usuario</h1>
@@ -32,19 +36,19 @@ function ProfilePage() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-gray-200 font-bold mb-2">Nombre</label>
-              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{user?.name}</div>
+              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{user.name || "No disponible"}</div>
             </div>
             <div>
               <label className="block text-gray-200 font-bold mb-2">Email</label>
-              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{user?.email}</div>
+              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{user.email || "No disponible"}</div>
             </div>
             <div>
               <label className="block text-gray-200 font-bold mb-2">Rol</label>
-              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{roleName}</div>
+              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{roleName || "No disponible"}</div>
             </div>
             <div>
               <label className="block text-gray-200 font-bold mb-2">Fecha de Creación</label>
-              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{new Date(user?.created_at).toLocaleDateString()}</div>
+              <div className="border border-gray-600 p-2 rounded bg-gray-900 text-gray-200">{new Date(user.created_at).toLocaleDateString() || "No disponible"}</div>
             </div>
           </div>
         </div>
